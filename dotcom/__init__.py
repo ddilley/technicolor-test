@@ -18,7 +18,7 @@ from flask.ext.login import LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
+"""
 @app.before_request
 def before_r():
   pass
@@ -26,6 +26,7 @@ def before_r():
 @app.after_request
 def after_r(response):
   return response
+"""
 
 @app.route('/python')
 def python_version():
