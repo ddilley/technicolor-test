@@ -2,8 +2,7 @@
 from flask import Flask, request, url_for, render_template
 
 # create app
-app = Flask('test_dotcom', static_folder='static', template_folder='templates')
-app.secret_key = 'seceret_sauce'
+app = Flask('test_dotcom', static_folder='dotcom/static', template_folder='templates')
 
 # register the configuration
 from test_lib.config.appConfig import register_config

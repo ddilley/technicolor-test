@@ -6,6 +6,8 @@ class Config(object):
     DEBUG                       = False
     ASSETS_DEBUG                = False
     ENABLE_SCHEME_ENFORCEMENT   = True
+    SESSION_COOKIE_NAME         = '_cs'
+    SECRET_KEY                  = 'seceret_sauce'
     pass
 
 # Production
