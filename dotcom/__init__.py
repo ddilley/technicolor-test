@@ -1,19 +1,13 @@
 
 from flask import Flask, request, url_for, render_template
-from test_lib.flask import force_scheme
 
 # create app
-app = Flask('test_dotcom')
+app = Flask('test_dotcom', static_folder='static', template_folder='templates')
+app.secret_key = 'seceret_sauce'
+
+# register the configuration
 from test_lib.config.appConfig import register_config
 register_config(app)
-
-# setup cache
-from flask.ext.cache import Cache
-app.cache = Cache(app)
-
-# setup session management
-from pressed_lib.flask.session import register_cache_session_handler
-register_cache_session_handler(app, cache=app.cache)
 
 # Define database access.
 from test_lib.data import register_db_session
@@ -45,5 +39,5 @@ from blueprints.homepage import homepage_blueprint
 app.register_blueprint(homepage_blueprint, url_prefix='/')
 
 # Import asset bundles.
-from test_dotcom.bundles import register_bundles
+from dotcom.bundles import register_bundles
 register_bundles(app)

@@ -2,7 +2,6 @@
 from setuptools import setup, find_packages
 
 setup(
-
     # general meta
     name='test-dotcom',
     version='0.0.1',
@@ -19,6 +18,8 @@ setup(
     install_requires = [
         'Flask==0.10',
         'Flask-Assets==0.8',
+        'Flask-Login==0.2.11',
+        'Flask-PyMongo==0.3.1',
         'Jinja2==2.6',
         'Werkzeug==0.8.3',
         'jsmin==2.0.2-1',

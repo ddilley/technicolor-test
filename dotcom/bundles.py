@@ -30,5 +30,3 @@ def register_bundles(app):
         output='gen/script.js'
     )
     assets.register('js_global', js_global)
-
-   

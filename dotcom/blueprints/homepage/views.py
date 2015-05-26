@@ -2,14 +2,8 @@
 
 from flask import current_app, render_template, request, session
 
-from sys import exc_info
-from traceback import format_exception
-from uuid import uuid4
-
-import re, urllib2, cPickle as pickle
-from pytz import timezone
-from urlparse import urlparse
 from . import homepage_blueprint
+from test_lib.flask import force_scheme
 # todo: login_required
 
 
