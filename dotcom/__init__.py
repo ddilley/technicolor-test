@@ -38,10 +38,8 @@ def python_version():
     return "Python version: "+str(sys.version_info)
 
 
-@app.route('/channel.html')
-
 # import blueprints
-from test_dotcom.blueprints.homepage import homepage_blueprint
+from blueprints.homepage import homepage_blueprint
 
 # register blueprints
 app.register_blueprint(homepage_blueprint, url_prefix='/')

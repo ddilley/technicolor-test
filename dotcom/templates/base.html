@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block page_title %}Default Page Title{% endblock page_title %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+        {% block head_block %}{% endblock head_block %}
+        {% block page_head_script %}{%- endblock page_head_script %}
+        {% block global_styles %}
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+            <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ baseUrl }}/static/images/global/favicon.ico">
+            {% assets "css_global" %}
+                <link rel="stylesheet" href="{{ ASSET_URL }}" />
+            {% endassets %}
+        {% endblock global_styles %}
+        {% block page_style %}{% endblock page_style %}
+        {% block meta_description %}{% endblock meta_description %}
+        {% block meta_keywords %}{% endblock meta_keywords %}
+    </head>
+    <body {% block body_attributes %}{% endblock body_attributes %}>
+        {% block messages %}
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul id="flashes" class="callout">
+                {% for message in messages %}
+                  <li>{{ message|safe }} <button>&times;</button></li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            {% block header_message %}{% endblock header_message %}
+        {%- endblock messages %}
+        {% block noscript %}{%- endblock noscript %}
+        <div class="header sticky">
+            <header>
+                {% block header %}
+                    {% import 'snippets/nav.html' %}
+                {% endblock header %}
+            </header>
+        </div>
+        <article>
+            {% block body %}Body{% endblock body %}
+        </article>
+        {% block footer %}{% endblock footer %}
+        {% block global_script %}
+            {% assets "js_global" %}
+                <script src="{{ ASSET_URL }}"></script>
+            {% endassets %}
+        {% endblock global_script %}
+    </body>
+</html>
