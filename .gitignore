@@ -1,0 +1,12 @@
+*.egg-info/
+*.py[co]
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.elasticbeanstalk/
+.localized
+.webassets-cache/
+cache/
+gen/
+*.zip
+

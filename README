@@ -1,0 +1,144 @@
+
+
+Authentication:
+    We use RSA keys to authenticate on the admin server admin.pressedjuicery.com where Git, Jenkins and phpMyAdmin are installed. We need you to generate a pair of RSA keys. One public key (that goes on the server) and one private (that only you have access to). When generating your keys, remember that if you do not include a password to use the key, anyone that has access to your private key will be able to use it. After generating your keys, provide us with your public key so we may install it on the server. You will then be able to configure authentication on your local machine. Please note that password authentication will not work.
+
+
+Configuring Authentication Locally:
+    In ~/.ssh/config:
+        Host admin.pressedjuicery.com
+        User YOUR_USERNAME_HERE
+        IdentityFile LOCATION_OF_YOUR_PRIVATE_KEY
+
+    ~/.ssh/whatever.pk is a suitable location for your private key.
+
+
+Using Authentication Locally:
+    git clone YOUR_USERNAME_HERE@admin.pressedjuicery.com/pressed-python.git will check the code out in a folder 'pressed-python' in whichever directory you are currently in. Alternatively, if you put a user name on your ssh config Host line, you can do git+ssh://host_from_ssh_config_here/pressed-python.git
+
+
+Running the Project Locally:
+    Make sure you are at the root of the project 'pressed-python' and...
+    Set Up Your Virtual Environment:
+        1) install virtualenv
+            a) OSX:
+                > sudo easy_install virtualenv
+                - or -
+                > sudo pip install virtualenv
+
+            b) apt (Linux):
+                > sudo apt-get install python-dev python-virtualenv
+                > sudo apt-get install libmysqlclient-dev
+                > sudo apt-get install libxml2-dev
+                > sudo apt-get install libxslt1-dev 
+
+        2) setup your virtual environment
+            a) > virtualenv venv
+            b) > source venv/bin/activate
+            b) > pip install -r requirements.txt
+
+    Install mysql
+        a) OSX
+            > Download and install mysql dmg archive: http://dev.mysql.com/downloads/mysql/
+            > sudo nano ~/.bash_profile
+            > Add to top of .bash_profile: export PATH=$PATH:/usr/local/mysql/bin
+            > Write out
+            > Load America, UTC and US data in to mysql table: 
+                > cat osx_settings/required_osx_zone_data.sql | mysql -u root mysql
+            > Optional: make mysql run on Yosemite boot:
+                > /Library/LaunchDaemons/com.mysql.mysql.plist
+                > Add: 
+                    <!--?xml version="1.0" encoding="UTF-8"?-->
+                    <plist version="1.0">
+                      <dict>
+                        <key>KeepAlive</key>
+                        <true />
+                        <key>Label</key>
+                        <string>com.mysql.mysqld</string>
+                        <key>ProgramArguments</key>
+                        <array>
+                          <string>/usr/local/mysql/bin/mysqld_safe</string>
+                          <string>--user=mysql</string>
+                        </array>
+                      </dict>
+                    </plist>
+                > sudo chown root:wheel /Library/LaunchDaemons/com.mysql.mysql.plist
+                > sudo chmod 644 /Library/LaunchDaemons/com.mysql.mysql.plist
+                > sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist
+
+    Get a fresh copy of the databse:
+        Our database is mysql, so make sure that you have it installed first.
+        At the root of the project, run ./get-production-database-copy.sh prompts will follow for the following where if you just press Enter the default value in brackets ([value]) will be used. If you enter another value and press enter, the value you specified will be used instead of the default:
+            1.) 'local db admin user':              (this is usually the default 'root')
+            2.) 'db admin password':                (this is the password to user in step 1). *If no password is set, just press Enter*
+            3.) 'NEW local db name':                The name of the database (defaults to 'pressed')
+            4.) 'NEW local db user':                The user for the database (defaults to 'pressed')
+            5.) 'NEW local db password':            The password for the user in step 4 ('pressed')
+            6.) 'Run update scripts when done?':    This will run DB migrations if set to 'Y'.
+
+    OSX: Install homebrew and xcode developer tools
+        > Install Homebrew (http://brew.sh/)
+            > Homebrew should install OSX's xcode developer tools automatically if they are not already installed. If it does not, run: 
+                > xcode-select --install
+        > ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    Install memcached
+        memcached is required to store sessions locally.
+            a) OSX:
+                > brew install memcached
+                > memcached
+                Optional: run memcache on login
+                > cd /usr/local/Cellar/memcached/
+                > ls -la
+                > cd in to directory contained in this folder (named based on memcache version name)
+                > cp homebrew.mxcl.memcached.plist ~/Library/LaunchAgents/
+                > launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
+
+    Install sass
+        We use sass as a CSS preprocessor
+                > sudo gem install sass
+
+    OSX: fix Python & firewall interaction (optional): 
+        > open -a "Keychain Access"
+        > Application menu > Certificate Assistant > Create a Certificate
+            > Name: Self-signed Applications
+            > Identity Type: Self Signed Root
+            > Certificate Type: Code Signing
+            > [x] Let me override defaults
+            > Change expiration date (3650 days or something similar)
+            > Accept remaining defaults
+        > Sign python binary in venv/bin
+            > codesign -f -s "Self-signed Applications" venv/bin/python
+            > open -a "System Preferences"
+            > Security & Privacy > Firewall >
+            > Select existing python binary or binaries in firewall list and remove
+            > Drag signed python binary or binaries from venv/bin in to firewall list
+
+    Run the project:
+        User site (pressedjuicery.com):
+            In the project root folder: python runsite.py
+            Navigate to 127.0.0.1:5000 in your browser
+        Backoffice (backoffice.pressedjuicery.com):
+            In the project root folder: python runadmin.py
+            Navigate to 127.0.0.1:5001 in your browser
+
+
+Continuous Deployment:
+    There are 2 development sites:
+        1.) Pressedjuicery.com
+        2.) backoffice.pressedjuicery.com
+    For each development site, there are 3 environments:
+        1.) testing [dotcom-testing.pressedjuicery.com, backoffice-testing.pressedjuicery.com]
+        2.) qa      [dotcom-qa.pressedjuicery.com, backoffice-qa.pressedjuicery.com]
+        3.) prod    [pressedjuicery.com -or- dotcom-prod.pressedjuicery.com, backoffice.pressedjuicery.com -or- backoffice-prod.pressedjuicery.com]
+    For each environment, there is a git branch set up for auto-deployment:
+        [environment  -  branch]
+        testing       -  master
+        qa            - qa
+        prod          - prod
+
+    *When you push your code to origin on testing, your changes auto-deploy to dotcom-testing.pressedjuicery.com and backoffice-testing.pressedjuicery.com
+
+    *When you push your code to origin on qa, your changes auto-deploy to dotcom-qa.pressedjuicery.com and backoffice-qa.pressedjuicery.com
+
+    *When you push your code to origin on prod, your changes auto-deploy to pressedjuicery.com and backoffice.pressedjuicery.com [Be careful with this!]
