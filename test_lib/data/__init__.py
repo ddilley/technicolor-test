@@ -11,6 +11,9 @@ def register_db_session(app):
     @app.before_request
     def open_db_session():
         request.db = mongo.db
+        # load test data into mongodb for authentication
+        # routed at homepage.login
+        
 
     @app.after_request
     def commit_db_session(response):

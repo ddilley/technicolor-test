@@ -12,33 +12,33 @@ def homepage():
     return render_template('homepage.html')
     
 
-@homepage_blueprint.route('login', methods=['GET', 'POST'])
 @force_scheme('https')
+@homepage_blueprint.route('login', methods=['GET', 'POST'])
 def login():
     return 'login here'
 
 
-@homepage_blueprint.route('logout')
+@homepage_blueprint.route('logout', methods=['GET'])
 def logout():
     return 'logout here'
 
 
-@homepage_blueprint.route('users')
 @force_scheme('https')
 #@login_required
+@homepage_blueprint.route('users', methods=['GET'])
 def list_users():
     return 'list users here'
 
 
-@homepage_blueprint.route('files')
 @force_scheme('https')
 #@login_required
+@homepage_blueprint.route('files', methods=['GET'])
 def list_files():
     return 'list files here'
 
 
-@homepage_blueprint.route('statuses')
 #@login_required
+@homepage_blueprint.route('statuses', methods=['GET'])
 def statuses_handler():
     return 'statuses here'
 

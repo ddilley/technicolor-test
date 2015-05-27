@@ -5,5 +5,22 @@
 {% block page_title %}Technicolor Test - David Dilley{% endblock page_title %}
 
 {% block body %}
-  hi
+	<p>
+  		The above navigation is in response to the Technicolor backend developer test as described below.
+	</p>
+	<ol>
+		<li>
+			<b>login/Logout</b>: an endpoint that authenticates a user based on a login/password passed in a JSON payload and verifies against a simple data structure in Mongo. Becomes 'Logout' if currently logged in. <i>username: test, password: test</i>
+		</li>
+		<li>
+			<b>list users</b>: an endpoint that returns all users in the database filtered by a URL parameter(city), grouped by a parameter(gender).
+		</li>
+		<li>
+			<b>check statuses</b>: an endpoint that checks the statuses of all of the components it depends on (Flask, Mongo, Python, Jinja, [TODO: what else?]).
+		</li>
+		<li>
+			<b>list files</b>: an endpoint that lists all of the files in this project's blueprint folder.
+		</li>
+
+	</ol>
 {% endblock body %}
