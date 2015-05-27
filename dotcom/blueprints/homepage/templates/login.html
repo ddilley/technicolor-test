@@ -1,1 +1,54 @@
-login.html
+
+{% extends "base.html" %}
+{% block meta_description %}
+  <meta name="description" content="Technicolor Test Login">
+{% endblock meta_description %}
+{% block page_title %}Technicolor Test - David Dilley{% endblock page_title %}
+
+{% block body %}
+<section>
+	<p>
+		The login url this form posts to accepts a json payload that includes 'username' and 'password' values.
+		This form uses Jquery to post the json to the endpoint and react to the result.
+	</p>
+	<form id="loginBox" action="/login" method="POST">
+		<fieldset>
+			<ul style="list-style-type:none;">
+				<li class="username"><label>username:</label> <input id="username" name="username"/></li>
+				<li class="password"><label>password:</label> <input id="password" name="password" type="password" />
+				<li><input type="submit" value="log in" class="b1" /></li>
+			</ul>
+		</fieldset>
+	</form>
+</section>
+{% endblock body %}
+{% block page_script %}
+<script type='text/javascript'>
+	$(document).on(ready(), function() {
+		// listen for login attempt events
+	    $(document).on("loginAttempted", function(event, data) {
+	        if(data.success) {
+	        	alert('successfully logged in.');
+	        } else {
+	        	alert('Invalid credentials, please try again.');
+	        }
+	    });
+	    // on form submit, post json payload to /login
+	    // and raise loginAttempted with attempt's data
+		$('#loginBox').on('submit', function(e) {
+			e.preventDefault();z
+			Pressed.Admin.Cleanses.processing = true;
+	        $.post("/login",
+	            {
+	                'username':  $('#username').val(),
+	                'password':  $('#password').val()
+	            },
+	            function(eventData){
+	                $(document).trigger("loginAttempted", [eventData]);
+	            },
+	            "json"
+	        );
+		});
+	});
+</script>
+{% endblock page_script %}

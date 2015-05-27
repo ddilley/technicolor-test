@@ -3,11 +3,8 @@ from flask import g, request, session, current_app, flash, redirect, url_for
 from functools import wraps
 from hashlib import md5
 
-from pressed_lib.util.security import is_logged_in, get_logged_in_user_id
-from pressed_lib.cart import ShoppingCart
-from pressed_lib.data.model.user import get_user_by_id
-
-from pressed_lib.util.security import get_customer_id
+from test_lib.util.security import is_logged_in, get_logged_in_user_id
+from test_lib.data.model.user import get_user_by_id, get_user_by_username
 
 
 def login_required(fn):
@@ -22,12 +19,12 @@ def login_required(fn):
     return decorated_view
 
 
-def login(login, password, include_flashes=True):
+def login(login, password):
     """
     Authenticates and logs in a user, None is returned
     if the authentication failed
     """
-    return current_app.auth_mgr.login(login, password, include_flashes)
+    return current_app.auth_mgr.login(login, password)
 
 
 def login_user(user):
@@ -59,8 +56,8 @@ def register_authentication_manager(app, login_view,
     @app.before_request
     def setup_request():
         if is_logged_in():
-            g.account = get_user_by_id(request.db, get_logged_in_user_id())
-            if not g.account:
+            g.user = get_user_by_id(request.db, get_logged_in_user_id())
+            if not g.user:
                 logout()
                 return
 
@@ -97,21 +94,17 @@ class AuthenticationManager(object):
         Logs in the user
         """
         # log them in
-        session['userId'] = user.id
-        g.account = user
+        session['userId'] = user.get('_id')
+        g.user = user
         return user
 
-    def login(self, login, password, include_flashes):
+    def login(self, login, password):
         """
         Performs authentication
         """
         # call auth method
-        # todo: get user where email==login
-        user = {}
-
-        if not md5(password).hexdigest() == user.passwordHash:
-            if include_flashes:
-                flash('Incorrect Password')
+        user = get_user_by_username(request.db, login)
+        if not md5(password).hexdigest() == user.get('password_hash'):
             return None
 
         return self.login_user(user)

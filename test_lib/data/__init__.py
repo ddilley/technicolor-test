@@ -1,16 +1,18 @@
 
 from flask import request
 from flask.ext.pymongo import PyMongo
+from pymongo import MongoClient
+
 
 def register_db_session(app):
     """
     Creates the db session
     """
-    mongo = PyMongo(app)
-    
     @app.before_request
     def open_db_session():
-        request.db = mongo.db
+        client = MongoClient('localhost', 27017)
+        db = client['test']
+        request.db = db
         # load test data into mongodb for authentication
         # routed at homepage.login
         

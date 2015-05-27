@@ -23,7 +23,7 @@ def register_bundles(app):
 
     ##
     # Javascript
-    js_global = Bundle('js/global.js','js/someUtil.js')
+    js_global = Bundle('js/jquery-1.9.1.js', 'js/global.js','js/someUtil.js')
     js_global = Bundle(
         Bundle(js_global),
          #otherJsBundled,

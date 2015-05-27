@@ -13,9 +13,9 @@ from test_lib.data import register_db_session
 register_db_session(app)
 
 # register login manager
-from flask.ext.login import LoginManager
-login_manager = LoginManager()
-login_manager.init_app(app)
+from test_lib.flask.login import register_authentication_manager
+register_authentication_manager(app, 'homepage.login')
+
 
 """
 @app.before_request
@@ -41,6 +41,7 @@ app.register_blueprint(homepage_blueprint, url_prefix='/')
 # Import asset bundles.
 from dotcom.bundles import register_bundles
 register_bundles(app)
+
 
 
 
