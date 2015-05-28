@@ -10,8 +10,7 @@ from bson import json_util
 from test_lib.data.model.user import create_test_users, get_users
 from test_lib.flask import force_scheme
 from test_lib.flask.login import do_login
-
-# todo: login_required
+from test_lib.util.files import list_dirs_files
 
 
 @homepage_blueprint.route('/')
@@ -41,7 +40,6 @@ def logout():
 
 
 @force_scheme('https')
-#@login_required
 @homepage_blueprint.route('users', methods=['GET'])
 def list_users():
 	city = request.args.get('city', None)
@@ -56,13 +54,20 @@ def list_users():
 
 
 @force_scheme('https')
-#@login_required
-@homepage_blueprint.route('files', methods=['GET'])
+@homepage_blueprint.route('files', methods=['GET', 'POST'])
 def list_files():
-    return 'list files here'
+	folder_name = request.form.get('folder_name', '')
+	folder_name = '%s'%folder_name
+	files = list_dirs_files(folder_name)
+	if files:
+		ret = str(list_dirs_files(folder_name))
+	if request.method=='POST':
+		if not files:
+			return json.dumps({'success':True, 'ret': 'No such folder or empty'})
+		return json.dumps({'success':True, 'ret':ret})
+	return render_template('list_files.html', ret=ret if files else None)
 
 
-#@login_required
 @homepage_blueprint.route('statuses', methods=['GET'])
 def statuses_handler():
     return 'statuses here'

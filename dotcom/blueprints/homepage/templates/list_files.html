@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+{% block meta_description %}
+  <meta name="description" content="Technicolor Test List Files">
+{% endblock meta_description %}
+{% block page_title %}Technicolor Test - David Dilley{% endblock page_title %}
+
+{% block body %}
+<section>
+	<p>
+		For a given directory (defaults to project root)
+		that is within this 'test' project, this will list said directory's files and display the result below.
+	</p>
+	<label>foldername: </label><input id="file_path" name="file_path" type="text" /><button id="submit_button">get results</button>
+</section>
+<section>
+	<h1>Results:</h1>
+	<div id="results">
+		currently empty
+	</div>
+</section>
+{% endblock body %}
+{% block page_script %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		// listen for login attempt events
+	    $(document).on("refreshResults", function(event, data) {
+	        if(data.success) {
+	        	$('#results').empty();
+	        	$('#results').append(data.ret);
+	        } else {
+	        	alert('Invalid credentials, please try again.');
+	        }
+	    });
+	    // on form submit, post json payload to /login
+	    // and raise loginAttempted with attempt's data
+		$('#submit_button').on('click', function(e) {
+			e.preventDefault();
+	        $.post("/files",
+	            {
+	                'folder_name':  $('#file_path').val()
+	            },
+	            function(eventData){
+	                $(document).trigger("refreshResults", [eventData]);
+	            },
+	            "json"
+	        );
+	        return false;
+		});
+	});
+</script>
+{% endblock page_script %}
