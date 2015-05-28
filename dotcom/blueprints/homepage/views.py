@@ -1,6 +1,6 @@
 
 
-from flask import current_app, g, render_template, request, session
+from flask import current_app, g, redirect, render_template, request, session
 
 from . import homepage_blueprint
 
@@ -9,7 +9,7 @@ from bson import json_util
 
 from test_lib.data.model.user import create_test_users
 from test_lib.flask import force_scheme
-from test_lib.flask.login import login as do_login
+from test_lib.flask.login import do_login
 
 # todo: login_required
 
@@ -36,7 +36,8 @@ def login():
 
 @homepage_blueprint.route('logout', methods=['GET'])
 def logout():
-    return 'logout here'
+	session.clear()
+	return redirect('/')
 
 
 @force_scheme('https')

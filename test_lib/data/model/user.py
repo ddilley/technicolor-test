@@ -52,7 +52,8 @@ def create_test_users(db):
 
 def get_user_by_id(db, uid):
 	user = db.users.find_one({'username': uid})
-	return user[0] if len(user)>0 else None
+	if user:
+		return user[0] if len(user)>0 else None
 
 def get_user_by_username(db, username):
 	ret = db.users.find_one({'username': username})

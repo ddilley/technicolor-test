@@ -7,7 +7,7 @@ def is_logged_in():
     """
     Checks to see if the user is logged in
     """
-    return 'usetId' in session
+    return 'userId' in session
 
 
 def get_logged_in_user_id():
