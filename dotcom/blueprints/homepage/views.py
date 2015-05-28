@@ -44,16 +44,14 @@ def logout():
 #@login_required
 @homepage_blueprint.route('users', methods=['GET'])
 def list_users():
-	filtered_by = request.args.get('city', None)
-	ordered_by = request.args.get('gender', None)
-	users = get_users(
-		request.db,
-		filtered_by,
-		ordered_by
-	)
+	city = request.args.get('city', None)
+	ordered_by = request.args.get('ordered_by', None)
+	users = get_users(request.db, city, '%s'%ordered_by)
 	return render_template(
 		'users.html',
-		users=users
+		users=users,
+		city=city,
+		ordered_by=ordered_by
 	)
 
 

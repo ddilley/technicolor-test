@@ -1,6 +1,7 @@
 
 from flask import request
 from flask.ext.pymongo import PyMongo
+from flask.ext.pymongo import ASCENDING, DESCENDING
 from hashlib import md5
 
 
@@ -10,6 +11,36 @@ def create_user(db, user):
 	"""
 	users = db.users
 	return users.insert(user)
+
+
+def get_user_by_id(db, uid):
+	user = db.users.find_one({'username': uid})
+	if user:
+		return user[0] if len(user)>0 else None
+
+
+def get_user_by_username(db, username):
+	ret = db.users.find_one({'username': username})
+	user = {}
+	for key, value in ret.items():
+		if key not in ['_id']:
+			user['%s'%key] = value
+	return user
+
+
+def get_users(db, city, ordered_by):
+	ret = []
+	users = db.users.find({
+		'city' : ('%s' % city)
+	}) if city else (
+		db.users.find({})
+	)
+	if ordered_by:
+		users = users.sort(u'%s'%ordered_by, ASCENDING)
+	for u in users:
+		ret.append(u)
+	return ret
+
 
 def create_test_users(db):
 	"""
@@ -46,34 +77,42 @@ def create_test_users(db):
 			'username': 		'Korra Avatar',
 			'password_hash':	md5('test').hexdigest(),
 			'gender': 			0,
-			'city': 			'Los Los Angeles'
+			'city': 			'Los Vegas'
 		}]
 	)
+	create_user(db,
+		[{
 
-def get_user_by_id(db, uid):
-	user = db.users.find_one({'username': uid})
-	if user:
-		return user[0] if len(user)>0 else None
-
-def get_user_by_username(db, username):
-	ret = db.users.find_one({'username': username})
-	user = {}
-	for key, value in ret.items():
-		if key not in ['_id']:
-			user['%s'%key] = value
-	return user
-
-def get_users(db, filtered_by, ordered_by):
-	ret = []
-	[
-		ret.append(x) for x in db.users.find({
-			'city' : ('%s' % filtered_by)
-		}).sort(
-			{'%s'%ordered_by : 0})
-	]
-
-
-
+			'username': 		'Bilbo Baggins',
+			'password_hash':	md5('test').hexdigest(),
+			'gender': 			1,
+			'city': 			'Los Angeles'
+		}]
+	)
+	create_user(db,
+		[{
+			'username': 		'Frederic Chopin',
+			'password_hash':	md5('test').hexdigest(),
+			'gender': 			1,
+			'city': 			'Los Vegas'
+		}]
+	)
+	create_user(db,
+		[{
+			'username': 		'Some Lady',
+			'password_hash':	md5('test').hexdigest(),
+			'gender': 			0,
+			'city': 			'Los Angeles'
+		}]
+	)
+	create_user(db,
+		[{
+			'username': 		'Bridget Maddison',
+			'password_hash':	md5('test').hexdigest(),
+			'gender': 			0,
+			'city': 			'Los Vegas'
+		}]
+	)
 	 
 				
 			
