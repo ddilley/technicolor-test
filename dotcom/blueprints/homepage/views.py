@@ -7,7 +7,7 @@ from . import homepage_blueprint
 import json
 from bson import json_util
 
-from test_lib.data.model.user import create_test_users
+from test_lib.data.model.user import create_test_users, get_users
 from test_lib.flask import force_scheme
 from test_lib.flask.login import do_login
 
@@ -44,7 +44,17 @@ def logout():
 #@login_required
 @homepage_blueprint.route('users', methods=['GET'])
 def list_users():
-    return 'list users here'
+	filtered_by = request.args.get('city', None)
+	ordered_by = request.args.get('gender', None)
+	users = get_users(
+		request.db,
+		filtered_by,
+		ordered_by
+	)
+	return render_template(
+		'users.html',
+		users=users
+	)
 
 
 @force_scheme('https')

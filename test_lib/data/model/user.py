@@ -63,6 +63,15 @@ def get_user_by_username(db, username):
 			user['%s'%key] = value
 	return user
 
+def get_users(db, filtered_by, ordered_by):
+	ret = []
+	[
+		ret.append(x) for x in db.users.find({
+			'city' : ('%s' % filtered_by)
+		}).sort(
+			{'%s'%ordered_by : 0})
+	]
+
 
 
 	 
