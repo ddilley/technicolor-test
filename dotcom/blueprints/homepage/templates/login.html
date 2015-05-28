@@ -16,15 +16,15 @@
 			<ul style="list-style-type:none;">
 				<li class="username"><label>username:</label> <input id="username" name="username"/></li>
 				<li class="password"><label>password:</label> <input id="password" name="password" type="password" />
-				<li><input type="submit" value="log in" class="b1" /></li>
+				<li><input type="submit" value="log in"/></li>
 			</ul>
 		</fieldset>
 	</form>
 </section>
 {% endblock body %}
 {% block page_script %}
-<script type='text/javascript'>
-	$(document).on(ready(), function() {
+<script type="text/javascript">
+	$(document).ready(function() {
 		// listen for login attempt events
 	    $(document).on("loginAttempted", function(event, data) {
 	        if(data.success) {
@@ -36,8 +36,7 @@
 	    // on form submit, post json payload to /login
 	    // and raise loginAttempted with attempt's data
 		$('#loginBox').on('submit', function(e) {
-			e.preventDefault();z
-			Pressed.Admin.Cleanses.processing = true;
+			e.preventDefault();
 	        $.post("/login",
 	            {
 	                'username':  $('#username').val(),
@@ -48,6 +47,7 @@
 	            },
 	            "json"
 	        );
+	        return false;
 		});
 	});
 </script>

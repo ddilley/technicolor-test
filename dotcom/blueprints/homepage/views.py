@@ -1,8 +1,11 @@
 
 
-from flask import current_app, g, jsonify, render_template, request, session
+from flask import current_app, g, render_template, request, session
 
 from . import homepage_blueprint
+
+import json
+from bson import json_util
 
 from test_lib.data.model.user import create_test_users
 from test_lib.flask import force_scheme
@@ -22,12 +25,12 @@ def login():
 	create_test_users(request.db)
 	if request.method=='POST':
 		user = do_login(
-			request.args.get('username'), 
-			request.args.get('password')
+			request.form.get('username'), 
+			request.form.get('password')
 		)
 		if not user:
-			return jsonify({'success': False})
-		return jsonify({'success': True, 'user': user})
+			return json.dumps({'success': False})
+		return json.dumps({'success': True})
 	return render_template('login.html')
 
 

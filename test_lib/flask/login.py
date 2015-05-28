@@ -104,7 +104,7 @@ class AuthenticationManager(object):
         """
         # call auth method
         user = get_user_by_username(request.db, login)
-        if not md5(password).hexdigest() == user.get('password_hash'):
+        if not md5('%s'%password).hexdigest() == user.get('password_hash'):
             return None
 
         return self.login_user(user)

@@ -1,6 +1,6 @@
 
 from flask import g, request, session
-# from test_lib.data.model.user import get_user_by_id
+from test_lib.data.model.user import get_user_by_id
 
 # logged in?
 def is_logged_in():
@@ -21,4 +21,4 @@ def get_logged_in_user(db):
     user_id = get_logged_in_user_id()
     if not user_id:
         return None
-    #return get_user_by_id(db, user_id)
+    return get_user_by_id(db, user_id)

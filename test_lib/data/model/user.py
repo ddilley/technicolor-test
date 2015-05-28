@@ -51,10 +51,17 @@ def create_test_users(db):
 	)
 
 def get_user_by_id(db, uid):
-	return db.users.find_one({'username': uid})
+	user = db.users.find_one({'username': uid})
+	return user[0] if len(user)>0 else None
 
 def get_user_by_username(db, username):
-	return db.users.find_one({'username': username})
+	ret = db.users.find_one({'username': username})
+	user = {}
+	for key, value in ret.items():
+		if key not in ['_id']:
+			user['%s'%key] = value
+	return user
+
 
 
 	 

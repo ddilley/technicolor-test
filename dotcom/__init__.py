@@ -1,5 +1,6 @@
 
-from flask import Flask, request, url_for, render_template
+from flask import Flask, g, request, url_for, render_template
+from test_lib.util.security import is_logged_in
 
 # create app
 app = Flask('test_dotcom', static_folder='dotcom/static', template_folder='dotcom/templates')
@@ -17,15 +18,13 @@ from test_lib.flask.login import register_authentication_manager
 register_authentication_manager(app, 'homepage.login')
 
 
-"""
 @app.before_request
 def before_r():
-  pass
+  g.is_logged_in = is_logged_in()
 
 @app.after_request
 def after_r(response):
   return response
-"""
 
 @app.route('/python')
 def python_version():
