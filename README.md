@@ -6,27 +6,27 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 	> git clone --bare https://github.com/ddilley/technicolor-test.git
 
 ## Installation
-	> Installation is possible with pip and easy_install and can be done in a virtual environment.
+	Installation is possible with pip and easy_install and can be done in a virtual environment.
 	> easy_install pip # if you don't already have pip installed
 
-	## Install Sass
+	Install Sass
 		> gem install sass
 
-	## set up and activate virtualenv:
-		> https://virtualenv.pypa.io/en/latest/installation.html
+	set up and activate virtualenv:
+		https://virtualenv.pypa.io/en/latest/installation.html
 
-	## after installing venv:
+	after installing venv:
 		> cd path/to/parent/venv/dir
 		> virtualenv venv
-		> source ath/to/parent/venv/dir/venv/bin/activate
+		> source path/to/parent/venv/dir/venv/bin/activate
 
-	## install dependencies within venv:
+	install dependencies within venv:
 		> cd path/to/project/root
 		> pip install -r requirements.txt
 
-	## Install and run mongodb:
-		> if you need to install mongo: http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
-		## make sure mongo is running:
+	Install and run mongodb:
+		if you need to install mongo: http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
+		make sure mongo is running:
 			> mongod
 			> -or-
 			> mongo
