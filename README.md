@@ -1,4 +1,4 @@
-# Technicolor BAckend Technical Test Applicant Submission: David Dilley
+# Technicolor Backend Technical Test Applicant Submission: David Dilley
 This is in response to the test sent in image format to dilley.david@gmail.com from Victoria.Xiong-Gnandt@technicolor.com with subject 'Backend Coding Test'.
 
 ## Clone this project repo
@@ -7,6 +7,7 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 
 ## Installation
 Installation is possible with pip and easy_install and can be done in a virtual environment.
+> easy_install pip # if you don't already have pip installed
 
 ## set up and activate virtualenv:
 	after install venv:
@@ -65,4 +66,3 @@ Install and run mongodb:
 			   	for user in ret:
 			   		print(user.city+': '+user.gender)
 			}
-			
