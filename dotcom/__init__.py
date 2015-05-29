@@ -1,6 +1,5 @@
 
 from flask import Flask, g, request, url_for, render_template
-from test_lib.util.customSonManipulator import register_db_son_manipulator
 
 # create app
 app = Flask('test_dotcom', static_folder='dotcom/static', template_folder='dotcom/templates')

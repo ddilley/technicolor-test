@@ -3,7 +3,7 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 
 ## Clone this project repo
 	> cd path/to/project/root
-	> git clone --bare https://github.com/ddilley/technicolor-test.git
+	> git clone https://github.com/ddilley/technicolor-test.git project_root_folder_name
 
 ## Installation
 	Installation is possible with pip and easy_install and can be done in a virtual environment.
@@ -27,9 +27,7 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 	Install and run mongodb:
 		if you need to install mongo: http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 		make sure mongo is running:
-			> mongod
-			> -or-
-			> mongo
+			> mongod # daemon
 
 ## Run this project
 	> cd path/to/project/root
