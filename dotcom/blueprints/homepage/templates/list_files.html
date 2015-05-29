@@ -18,13 +18,16 @@
 	<b>url-paramter-based links:</b><br />
 	<ul>
 		<li><a href='/files?path=dotcom%2Fblueprints'>{{ file_scope }}/dotcom/blueprints</a></li>
+		<li><a href='/files?path=dotcom%2Fblueprints%2Fhomepage%2Ftemplates'>{{ file_scope }}/dotcom/blueprints/homepage/templates</a></li>
+		<li><a href='/files?path=dotcom%2Fblueprints%2Fhomepage%2Fassets'>{{ file_scope }}/dotcom/blueprints/homepage/assets</a></li>
+		<li><a href='/files?path=test_lib%2Futil'>{{ file_scope }}/test_lib/util</a></li>
 	</ul>
 	<hr />
 </section>
 <section>
 	<h1>Results:</h1>
 	<div id="results">
-		currently empty
+		{% if ret %}currently empty{% endif %}
 	</div>
 </section>
 {% endblock body %}
@@ -55,6 +58,10 @@
 	        );
 	        return false;
 		});
+		if({{ 'true' if ret and ret|length>0 else 'false' }}) {
+			$('#results').empty();
+	        $('#results').append('{{ ret }}');
+		}
 	});
 </script>
 {% endblock page_script %}

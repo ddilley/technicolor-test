@@ -63,6 +63,7 @@ def list_users():
 def list_files():
 	path = str(request.form.get('path', '')) if request.method=='POST' \
 	else str(request.args.get('path', ''))
+	files = []
 	if path:
 		if not path[0]=='/':
 			path = '/%s'%path
@@ -75,7 +76,7 @@ def list_files():
 			return json.dumps({'success':True, 'ret':files})
 	return render_template(
 		'list_files.html',
-		ret=files if path and files else None,
+		ret=files,
 		file_scope=PROJECT_ROOT
 	)
 
