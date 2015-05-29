@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% block meta_description %}
+  <meta name="description" content="Technicolor Test Status Checks">
+{% endblock meta_description %}
+{% block page_title %}Technicolor Test - David Dilley{% endblock page_title %}
+
+{% block body %}
+<section>
+	<p>
+		This endpoint shows status checks for:<br />
+		<ul>
+			{% for key, status in statuses.items() %}
+				<li>{{ key }} : {{ status if status else '*(DOWN!)' }}</li>
+			{% endfor %}
+		</ul> 
+	</p>
+</section>
+{% endblock body %}
+

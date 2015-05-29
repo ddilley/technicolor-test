@@ -1,6 +1,7 @@
 
 
 from flask import current_app, g, redirect, render_template, request, session
+from healthcheck import HealthCheck
 
 from . import homepage_blueprint
 
@@ -10,9 +11,10 @@ from bson import json_util
 from test_lib.data.model.user import create_test_users, get_users
 from test_lib.flask import force_scheme
 from test_lib.flask.login import do_login
+from test_lib.util.dependency_statuses import flask_available, mongo_available
 from test_lib.util.files import list_dirs_files
 
-import os
+import os, sys
 
 # relative to this file(!)
 PROJECT_ROOT = os.path.abspath(os.path.abspath(__file__)+'../../../../../')
@@ -81,8 +83,10 @@ def list_files():
 	)
 
 
-@homepage_blueprint.route('statuses', methods=['GET'])
-def statuses_handler():
-    return 'statuses here'
+# set healthcheck URL
+from dotcom import app
+health = HealthCheck(app, "/statuses")
+health.add_check(mongo_available)
+health.add_check(flask_available)
 
 

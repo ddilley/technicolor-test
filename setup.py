@@ -22,6 +22,7 @@ setup(
         'Flask-PyMongo==0.3.1',
         'Jinja2==2.6',
         'Werkzeug==0.8.3',
+        'healthcheck==1.0.0',
         'jsmin==2.0.2-1',
         'cssmin==0.2.0',
         'urllib3==1.5'
