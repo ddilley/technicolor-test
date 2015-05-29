@@ -57,7 +57,8 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 		It came in handy with this project for the ajax functionalities.
 	Mongo:
 		I chose MongoDB (using module PyMongo) because I recently began reading and 
-		learning about it and I wanted to see what it was like to use a not-only-SQL database.
+		learning about it and I wanted to see what it was like to use a not-only-SQL
+		database.
 
 ## Endpoint versioning ("The endpoints would need to support versioning, please describe how to accomplish this")
 We could have each version installed and running within different directories. Each could
