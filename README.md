@@ -2,25 +2,26 @@
 This is in response to the test sent in image format to dilley.david@gmail.com from Victoria.Xiong-Gnandt@technicolor.com with subject 'Backend Coding Test'.
 
 ## Clone this project repo
-	cd path/to/project/root
-	git clone --bare https://github.com/ddilley/technicolor-test.git
+	> cd path/to/project/root
+	> git clone --bare https://github.com/ddilley/technicolor-test.git
 
 ## Installation
 Installation is possible with pip and easy_install and can be done in a virtual environment.
-> easy_install pip # if you don't already have pip installed
+	> easy_install pip # if you don't already have pip installed
 
 ## set up and activate virtualenv:
-> https://virtualenv.pypa.io/en/latest/installation.html
-after installing venv:
-	cd path/to/parent/venv/dir
-	virtualenv venv
-	source ath/to/parent/venv/dir/venv/bin/activate
+	> https://virtualenv.pypa.io/en/latest/installation.html
 
-install dependencies within venv:
+## after installing venv:
+	> cd path/to/parent/venv/dir
+	> virtualenv venv
+	> source ath/to/parent/venv/dir/venv/bin/activate
+
+## install dependencies within venv:
 	cd path/to/project/root
 	pip install -r requirements.txt
 
-Install and run mongodb:
+## Install and run mongodb:
 	if you need to install mongo:
 		http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 	make sure mongo is running:
