@@ -10,10 +10,11 @@ Installation is possible with pip and easy_install and can be done in a virtual 
 > easy_install pip # if you don't already have pip installed
 
 ## set up and activate virtualenv:
-	after install venv:
-		cd path/to/parent/venv/dir
-		virtualenv venv
-		source ath/to/parent/venv/dir/venv/bin/activate
+> https://virtualenv.pypa.io/en/latest/installation.html
+after installing venv:
+	cd path/to/parent/venv/dir
+	virtualenv venv
+	source ath/to/parent/venv/dir/venv/bin/activate
 
 install dependencies within venv:
 	cd path/to/project/root
