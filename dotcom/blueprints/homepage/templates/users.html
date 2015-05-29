@@ -10,8 +10,7 @@
 	<p>
 		This endpoint accepts GET url parameters to filter the user list (from Mongo)
 		by url parameter 'city' (correlates with user.city) & sorts them ordered 
-		by url parameter 'gender' (correlates with user.gender where 0=female and 1=male)
-		For the sake of , here are some links to this endpoint with parameters specified:
+		by url parameter 'ordered_by'. For the sake of convenience, here are some links to this endpoint with parameters specified:
 		<ul>
 			<li>where city is 'Los Angeles' ordered by gender: <a href="/users?city=Los+Angeles&ordered_by=gender">127.0.0.1:5000/users?city=Los+Angeles&gordered_by=gender</a></li>
 			<li>where city is 'Los Vegas' ordered by user.gender: <a href="/users?city=Los+Angeles&ordered_by=gender">127.0.0.1:5000/users?city=Los+Vegas&&ordered_by=gender</a></li>
