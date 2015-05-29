@@ -2,6 +2,10 @@
 from flask import g, request, session
 from test_lib.data.model.user import get_user_by_id
 
+"""
+    Example of security related utils
+"""
+
 # logged in?
 def is_logged_in():
     """

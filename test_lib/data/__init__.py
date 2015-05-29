@@ -3,6 +3,9 @@ from flask import request
 from flask.ext.pymongo import PyMongo
 from pymongo import MongoClient
 
+"""
+    This registers mongo as the apps DB
+"""
 
 def register_db_session(app, use_manipulator=True):
     """

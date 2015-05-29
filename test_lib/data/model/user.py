@@ -4,6 +4,10 @@ from flask.ext.pymongo import PyMongo
 from flask.ext.pymongo import ASCENDING, DESCENDING
 from hashlib import md5
 
+"""
+	An example of a DAO layer for the user object
+"""
+
 
 def create_user(db, user):
 	"""

@@ -1,6 +1,10 @@
 
 import os
 
+"""
+    An example of how we might manage environment configurations
+"""
+
 # Base settings
 class Config(object):
     DEBUG                       = False

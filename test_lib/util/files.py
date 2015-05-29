@@ -1,6 +1,9 @@
 
 import os
 
+"""
+	Utils for file operations
+"""
 
 def list_dirs_files(path='', file_scope=None):
 	if file_scope is None:

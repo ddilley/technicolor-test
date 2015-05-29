@@ -1,6 +1,10 @@
 
 from flask.ext.assets import Environment, Bundle
 
+"""
+    An example of how we might bundle assets
+"""
+
 def register_bundles(app):
     assets = Environment(app)
     assets.debug = app.config.get('ASSETS_DEBUG', False)

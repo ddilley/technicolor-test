@@ -1,4 +1,8 @@
 
+"""
+	Health Checker checks
+"""
+
 def mongo_available():
 	from pymongo import MongoClient
 	client = MongoClient('localhost', 27017)
