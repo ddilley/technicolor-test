@@ -37,13 +37,13 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 
 ## Technologies Used
 	Python:
-		I chose Python because it is my most seasoned language. For any given project that is not a test, compiled languages VS scripting languages would be weighed for pros and cons.
+		I chose Python because it is my most seasoned language. For any given project that is not a test compiled languages VS scripting languages would be weighed for pros and cons according to the scope of the project, as would frameworks and development speed. I'm sure Node.JS would have also been an excellent choice.
 	Flask:
-		I chose Flask as a framework because it is a micro framework which affords the ability to choose smaller grranu;les of imported functionality than a 'macro' framework (such as Django) and so seemed appropriate for a small app like this.
+		I chose Flask as a framework because it is a micro framework which affords the ability to choose smaller granules of imported functionality than a 'macro' framework (such as Django) and so seemed appropriate for a small app like this.
 	Jinja2:
 		I chose Jinja2 templating because I chose Python as the scripting language and Jinja2 has pythonic (and therefore complementing) syntax.
 	JQuery:
-		I chose JQuery for this project for it's ease of use and friendly syntax. IT came in handy for the ajax functionalities.
+		I chose JQuery for this project for it's ease of use and friendly syntax. It came in handy with this project for the ajax functionalities.
 	Mongo:
 		I chose MongoDB (using module PyMongo) because I recently began reading and learning about it and I wanted to see what it was like to use a not-only-SQL database.
 
