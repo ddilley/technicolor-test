@@ -11,7 +11,15 @@
 		For a given directory (defaults to project root)
 		that is within this 'test' project, this will list said directory's files and display the result below.
 	</p>
-	<label>foldername: </label><input id="file_path" name="file_path" type="text" /><button id="submit_button">get results</button>
+	<hr />
+	<b>form-based:</b><br />
+	<label>{{ file_scope }}/</label><input id="path" name="path" type="text" /><button id="submit_button">get results</button>
+	<hr />
+	<b>url-paramter-based links:</b><br />
+	<ul>
+		<li><a href='/files?path=dotcom%2Fblueprints'>{{ file_scope }}/dotcom/blueprints</a></li>
+	</ul>
+	<hr />
 </section>
 <section>
 	<h1>Results:</h1>
@@ -38,7 +46,7 @@
 			e.preventDefault();
 	        $.post("/files",
 	            {
-	                'folder_name':  $('#file_path').val()
+	                'path':  $('#path').val()
 	            },
 	            function(eventData){
 	                $(document).trigger("refreshResults", [eventData]);

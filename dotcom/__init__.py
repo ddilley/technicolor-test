@@ -28,8 +28,3 @@ app.register_blueprint(homepage_blueprint, url_prefix='/')
 from dotcom.bundles import register_bundles
 register_bundles(app)
 
-
-
-
-
-

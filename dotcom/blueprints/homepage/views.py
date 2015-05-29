@@ -12,6 +12,11 @@ from test_lib.flask import force_scheme
 from test_lib.flask.login import do_login
 from test_lib.util.files import list_dirs_files
 
+import os
+
+# relative to this file(!)
+PROJECT_ROOT = os.path.abspath(os.path.abspath(__file__)+'../../../../../')
+
 
 @homepage_blueprint.route('/')
 def homepage():
@@ -56,16 +61,23 @@ def list_users():
 @force_scheme('https')
 @homepage_blueprint.route('files', methods=['GET', 'POST'])
 def list_files():
-	folder_name = request.form.get('folder_name', '')
-	folder_name = '%s'%folder_name
-	files = list_dirs_files(folder_name)
-	if files:
-		ret = str(list_dirs_files(folder_name))
-	if request.method=='POST':
+	path = str(request.form.get('path', '')) if request.method=='POST' \
+	else str(request.args.get('path', ''))
+	if path:
+		if not path[0]=='/':
+			path = '/%s'%path
+		files = list_dirs_files(path, PROJECT_ROOT)
 		if not files:
-			return json.dumps({'success':True, 'ret': 'No such folder or empty'})
-		return json.dumps({'success':True, 'ret':ret})
-	return render_template('list_files.html', ret=ret if files else None)
+			if request.method=='POST':
+				return json.dumps({'success':True, 'ret': 'No such folder or empty'})
+				files = []
+		if request.method=='POST':
+			return json.dumps({'success':True, 'ret':files})
+	return render_template(
+		'list_files.html',
+		ret=files if path and files else None,
+		file_scope=PROJECT_ROOT
+	)
 
 
 @homepage_blueprint.route('statuses', methods=['GET'])

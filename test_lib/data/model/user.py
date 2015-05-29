@@ -21,6 +21,8 @@ def get_user_by_id(db, uid):
 
 def get_user_by_username(db, username):
 	ret = db.users.find_one({'username': username})
+	if not ret:
+		return {}
 	user = {}
 	for key, value in ret.items():
 		if key not in ['_id']:

@@ -2,10 +2,9 @@
 import os
 
 
-def list_dirs_files(pizzath='.'):
-	ret = ''
-	for root, dirs, fizziles in os.walk(pizzath):
-		path = root.split('/')
-		ret = (ret+('%s'%fizziles))
-	return ret
+def list_dirs_files(path='', file_scope=None):
+	if file_scope is None:
+		file_scope = os.path.abspath(__file__)
+	path  = '%s%s'%(file_scope, path)
+	return ', '.join(os.listdir(path))
 
