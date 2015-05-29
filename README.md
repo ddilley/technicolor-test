@@ -31,7 +31,7 @@ This is in response to the test sent in image format to dilley.david@gmail.com f
 			> -or-
 			> mongo
 
-## run this project
+## Run this project
 	> cd path/to/project/root
 	> python runsite.py
 	> open your browser and navigate to 127.0.0.1:5000
