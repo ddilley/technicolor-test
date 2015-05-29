@@ -43,7 +43,7 @@ def getConfig():
     elif os.environ["PROJECT_ENV_NAME"] == "prod":
         return ProductionConfig
     else:
-        raise Exception("Unable to determine PRESSED_ENV_NAME")
+        raise Exception("Unable to determine PROJECT_ENV_NAME")
 
 
 def register_config(app):

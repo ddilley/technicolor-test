@@ -73,7 +73,8 @@ endpoints.
 	A possible pagination solution for endpoints that display result sets such as /users:
 		Since MongoDB and PyMongo are being used, pagination would be pretty simple using PyMongo syntax.
 		We would use .find() to get and possibly filter the initial result set. Then skip the cursor returned from that
-		by (page number multiplied by number of results) and limit that by a n_per_page param.
+		by (page number multiplied by number of results) and limit that by a n_per_page (number of results
+			per page) param.
 		Below is an example of this on the user object:
 			function printUsersWithPagination(page_number, n_per_page) {
 			   print("Page: " + page_number);
