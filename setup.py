@@ -16,7 +16,7 @@ setup(
 
     # dependencies
     install_requires = [
-        'Flask==0.10',
+        'Flask==1.0',
         'Flask-Assets==0.8',
         'Flask-Login==0.2.11',
         'Flask-PyMongo==0.3.1',
