@@ -20,7 +20,7 @@ setup(
         'Flask-Assets==0.8',
         'Flask-Login==0.2.11',
         'Flask-PyMongo==0.3.1',
-        'Jinja2==2.6',
+        'Jinja2==2.11.3',
         'Werkzeug==0.8.3',
         'healthcheck==1.0.0',
         'jsmin==2.0.2-1',
