@@ -25,7 +25,7 @@ setup(
         'healthcheck==1.0.0',
         'jsmin==2.0.2-1',
         'cssmin==0.2.0',
-        'urllib3==1.5'
+        'urllib3==1.26.5'
     ],
     # additional files to include
     include_package_data=True,
